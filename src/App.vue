@@ -3,7 +3,7 @@ import BottomNav from './components/layout/BottomNav.vue'
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 text-gray-900 pb-20 max-w-md mx-auto relative">
+  <div class="min-h-screen pb-20 max-w-md mx-auto relative">
     <!-- Konten Utama Halaman -->
     <main class="w-full">
       <router-view />

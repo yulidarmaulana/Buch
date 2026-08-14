@@ -195,7 +195,7 @@ const goHome = () => {
     <div class="flex items-center justify-between mb-4">
       <button 
         @click="goHome" 
-        class="flex items-center text-xs font-medium text-gray-500 hover:text-gray-900 transition-colors"
+        class="flex items-center text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors"
       >
         <ArrowLeft class="w-4 h-4 mr-1" />
         Ke Rak Buku
@@ -217,14 +217,14 @@ const goHome = () => {
     </div>
 
     <header class="mb-6">
-      <h1 class="text-xl font-bold tracking-tight text-gray-900">Dashboard Kelola Buku</h1>
-      <p class="text-xs text-gray-500 mt-0.5">Tambah buku baru atau perbarui progres bacaan Anda.</p>
+      <h1 class="text-xl font-bold tracking-tight text-gray-900 dark:text-gray-100">Dashboard Kelola Buku</h1>
+      <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">Tambah buku baru atau perbarui progres bacaan Anda.</p>
     </header>
 
     <!-- FORM INPUT BUKU -->
-    <div class="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm mb-8">
-      <div class="flex items-center justify-between mb-4 pb-2 border-b border-gray-100">
-        <h2 class="text-xs font-bold uppercase tracking-wider text-indigo-600 flex items-center gap-1.5">
+    <div class="bg-white dark:bg-gray-900 rounded-2xl p-4 border border-gray-100 dark:border-gray-800 shadow-sm mb-8">
+      <div class="flex items-center justify-between mb-4 pb-2 border-b border-gray-100 dark:border-gray-800">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 flex items-center gap-1.5">
           <Edit3 class="w-4 h-4" />
           {{ editingBookId ? 'Edit Data Buku' : 'Tambah Buku Baru' }}
         </h2>
@@ -232,7 +232,7 @@ const goHome = () => {
         <button 
           v-if="editingBookId"
           @click="resetForm"
-          class="text-[11px] text-gray-400 hover:text-gray-600 flex items-center gap-1"
+          class="text-[11px] text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 flex items-center gap-1"
         >
           <X class="w-3.5 h-3.5" /> Batal Edit
         </button>
@@ -242,7 +242,7 @@ const goHome = () => {
       <button 
         type="button"
         @click="isSearchModalOpen = true"
-        class="w-full mb-4 py-2.5 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
+        class="w-full mb-4 py-2.5 px-3 bg-indigo-50 dark:bg-indigo-900/30 hover:bg-indigo-100 dark:hover:bg-indigo-900/50 text-indigo-700 dark:text-indigo-400 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-colors"
       >
         <Search class="w-4 h-4" />
         Cari & Auto-fill via Google Books
@@ -251,40 +251,40 @@ const goHome = () => {
       <form @submit.prevent="handleSubmit" class="space-y-3.5 text-xs">
         <!-- Judul -->
         <div>
-          <label class="block font-medium text-gray-700 mb-1">Judul Buku *</label>
+          <label class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Judul Buku *</label>
           <input 
             v-model="form.title" 
             type="text" 
             placeholder="Contoh: Atomic Habits"
-            class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:bg-white dark:focus:bg-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             required
           />
         </div>
 
         <!-- Penulis -->
         <div>
-          <label class="block font-medium text-gray-700 mb-1">Penulis (Pisahkan dengan koma)</label>
+          <label class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Penulis (Pisahkan dengan koma)</label>
           <input 
             v-model="form.authors" 
             type="text" 
             placeholder="Contoh: James Clear, John Doe"
-            class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:bg-white dark:focus:bg-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           />
         </div>
 
         <!-- URL Cover & Preview -->
         <div class="grid grid-cols-4 gap-2 items-center">
           <div class="col-span-3">
-            <label class="block font-medium text-gray-700 mb-1">URL Gambar Sampul</label>
+            <label class="block font-medium text-gray-700 dark:text-gray-300 mb-1">URL Gambar Sampul</label>
             <input 
               v-model="form.coverUrl" 
               type="text" 
               placeholder="https://..."
-              class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 text-[11px]"
+              class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:bg-white dark:focus:bg-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-[11px]"
             />
           </div>
           <div class="col-span-1 flex justify-center">
-            <div class="w-10 h-14 bg-gray-100 rounded-md overflow-hidden border border-gray-200 flex items-center justify-center text-[9px] text-gray-400">
+            <div class="w-10 h-14 bg-gray-100 dark:bg-gray-800 rounded-md overflow-hidden border border-gray-200 dark:border-gray-700 flex items-center justify-center text-[9px] text-gray-400 dark:text-gray-500">
               <img v-if="form.coverUrl" :src="form.coverUrl" class="w-full h-full object-cover" />
               <span v-else>No Cover</span>
             </div>
@@ -293,10 +293,10 @@ const goHome = () => {
 
         <!-- Status Membaca -->
         <div>
-          <label class="block font-medium text-gray-700 mb-1">Status Membaca</label>
+          <label class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Status Membaca</label>
           <select 
             v-model="form.status"
-            class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:bg-white dark:focus:bg-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           >
             <option value="reading">Sedang Dibaca</option>
             <option value="completed">Selesai Dibaca</option>
@@ -307,28 +307,28 @@ const goHome = () => {
         <!-- Halaman Total & Progress -->
         <div class="grid grid-cols-2 gap-3">
           <div>
-            <label class="block font-medium text-gray-700 mb-1">Halaman Saat Ini</label>
+            <label class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Halaman Saat Ini</label>
             <input 
               v-model.number="form.currentPage" 
               type="number" 
               min="0"
-              class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:bg-white dark:focus:bg-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
           <div>
-            <label class="block font-medium text-gray-700 mb-1">Total Halaman</label>
+            <label class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Total Halaman</label>
             <input 
               v-model.number="form.totalPages" 
               type="number" 
               min="0"
-              class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:bg-white dark:focus:bg-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
         </div>
 
         <!-- Rating Bintang -->
         <div>
-          <label class="block font-medium text-gray-700 mb-1">Rating Pribadi (1 - 5)</label>
+          <label class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Rating Pribadi (1 - 5)</label>
           <div class="flex items-center gap-1.5">
             <button 
               type="button" 
@@ -339,21 +339,21 @@ const goHome = () => {
             >
               <Star 
                 class="w-5 h-5" 
-                :class="star <= form.rating ? 'fill-amber-400 text-amber-400' : 'text-gray-300'"
+                :class="star <= form.rating ? 'fill-amber-400 text-amber-400' : 'text-gray-300 dark:text-gray-700'"
               />
             </button>
-            <span class="text-xs font-semibold text-gray-600 ml-2">{{ form.rating }} Bintang</span>
+            <span class="text-xs font-semibold text-gray-600 dark:text-gray-400 ml-2">{{ form.rating }} Bintang</span>
           </div>
         </div>
 
         <!-- Catatan / Ulasan -->
         <div>
-          <label class="block font-medium text-gray-700 mb-1">Catatan & Ulasan Pribadi</label>
+          <label class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Catatan & Ulasan Pribadi</label>
           <textarea 
             v-model="form.review" 
             rows="3"
             placeholder="Tulis opini, ringkasan, atau kutipan favorit dari buku ini..."
-            class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:bg-white dark:focus:bg-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
           ></textarea>
         </div>
 
@@ -361,7 +361,7 @@ const goHome = () => {
         <button 
           type="submit" 
           :disabled="isSubmitting"
-          class="w-full py-3 bg-gray-900 hover:bg-gray-800 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm active:scale-[0.98]"
+          class="w-full py-3 bg-gray-900 dark:bg-indigo-600 hover:bg-gray-800 dark:hover:bg-indigo-500 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm active:scale-[0.98]"
         >
           <Loader2 v-if="isSubmitting" class="w-4 h-4 animate-spin" />
           <template v-else>
@@ -374,28 +374,28 @@ const goHome = () => {
 
     <!-- DAFTAR KELOLA BUKU TERBAIK -->
     <div class="space-y-3">
-      <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500">Daftar Buku di Database</h3>
+      <h3 class="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">Daftar Buku di Database</h3>
 
       <!-- Tab Filter -->
-      <div class="flex bg-gray-200/60 p-1 rounded-xl text-xs font-medium">
+      <div class="flex bg-gray-200/60 dark:bg-gray-800/60 p-1 rounded-xl text-xs font-medium">
         <button 
           @click="activeTabFilter = 'reading'; loadBooks()"
           class="flex-1 py-1.5 rounded-lg transition-all"
-          :class="activeTabFilter === 'reading' ? 'bg-white text-indigo-600 shadow-2xs font-semibold' : 'text-gray-500'"
+          :class="activeTabFilter === 'reading' ? 'bg-white dark:bg-gray-900 text-indigo-600 dark:text-indigo-400 shadow-2xs font-semibold' : 'text-gray-500 dark:text-gray-400'"
         >
           Dibaca
         </button>
         <button 
           @click="activeTabFilter = 'completed'; loadBooks()"
           class="flex-1 py-1.5 rounded-lg transition-all"
-          :class="activeTabFilter === 'completed' ? 'bg-white text-green-600 shadow-2xs font-semibold' : 'text-gray-500'"
+          :class="activeTabFilter === 'completed' ? 'bg-white dark:bg-gray-900 text-green-600 dark:text-green-400 shadow-2xs font-semibold' : 'text-gray-500 dark:text-gray-400'"
         >
           Selesai
         </button>
         <button 
           @click="activeTabFilter = 'wishlist'; loadBooks()"
           class="flex-1 py-1.5 rounded-lg transition-all"
-          :class="activeTabFilter === 'wishlist' ? 'bg-white text-rose-600 shadow-2xs font-semibold' : 'text-gray-500'"
+          :class="activeTabFilter === 'wishlist' ? 'bg-white dark:bg-gray-900 text-rose-600 dark:text-rose-400 shadow-2xs font-semibold' : 'text-gray-500 dark:text-gray-400'"
         >
           Wishlist
         </button>
@@ -408,7 +408,7 @@ const goHome = () => {
       </div>
 
       <!-- Empty State -->
-      <div v-else-if="booksList.length === 0" class="bg-white rounded-2xl p-6 text-center border border-gray-100 text-xs text-gray-400">
+      <div v-else-if="booksList.length === 0" class="bg-white dark:bg-gray-900 rounded-2xl p-6 text-center border border-gray-100 dark:border-gray-800 text-xs text-gray-400 dark:text-gray-500">
         Belum ada buku dalam kategori ini.
       </div>
 
@@ -417,18 +417,18 @@ const goHome = () => {
         <div 
           v-for="book in booksList" 
           :key="book.id"
-          class="bg-white p-3 rounded-xl border border-gray-100 shadow-2xs flex items-center justify-between gap-3"
+          class="bg-white dark:bg-gray-900 p-3 rounded-xl border border-gray-100 dark:border-gray-800 shadow-2xs flex items-center justify-between gap-3"
         >
           <div class="flex items-center gap-3 min-w-0">
             <img 
               v-if="book.coverUrl" 
               :src="book.coverUrl" 
-              class="w-10 h-14 object-cover rounded-md flex-shrink-0 bg-gray-100" 
+              class="w-10 h-14 object-cover rounded-md flex-shrink-0 bg-gray-100 dark:bg-gray-800" 
             />
             <div class="min-w-0">
-              <h4 class="text-xs font-bold text-gray-900 truncate">{{ book.title }}</h4>
-              <p class="text-[11px] text-gray-500 truncate">{{ book.authors.join(', ') }}</p>
-              <p class="text-[10px] text-gray-400 mt-0.5">Hal. {{ book.currentPage }} / {{ book.totalPages }}</p>
+              <h4 class="text-xs font-bold text-gray-900 dark:text-gray-100 truncate">{{ book.title }}</h4>
+              <p class="text-[11px] text-gray-500 dark:text-gray-400 truncate">{{ book.authors.join(', ') }}</p>
+              <p class="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">Hal. {{ book.currentPage }} / {{ book.totalPages }}</p>
             </div>
           </div>
 
@@ -436,14 +436,14 @@ const goHome = () => {
           <div class="flex items-center gap-1">
             <button 
               @click="startEdit(book)"
-              class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+              class="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:bg-indigo-900/30 rounded-lg transition-colors"
               title="Edit Data"
             >
               <Edit3 class="w-4 h-4" />
             </button>
             <button 
               @click="handleDelete(book.id, book.title)"
-              class="p-2 text-gray-400 hover:text-rose-600 hover:bg-rose-50 rounded-lg transition-colors"
+              class="p-2 text-gray-400 hover:text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/30 rounded-lg transition-colors"
               title="Hapus Buku"
             >
               <Trash2 class="w-4 h-4" />

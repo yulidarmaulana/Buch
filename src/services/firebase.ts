@@ -45,16 +45,21 @@ const BOOKS_COLLECTION = 'books'
 // ==========================================
 
 /**
- * Mengambil daftar buku dari Firestore berdasarkan status (reading / completed / wishlist)
+ * Mengambil daftar buku dari Firestore berdasarkan status (reading / completed / wishlist / all)
  */
-export const getBooksByStatus = async (status: BookStatus): Promise<Book[]> => {
+export const getBooksByStatus = async (status: BookStatus | 'all'): Promise<Book[]> => {
     try {
         // Hapus orderBy('createdAt', 'desc') dari query Firebase 
         // untuk menghindari error "Query requires an index".
-        const q = query(
-            collection(db, BOOKS_COLLECTION),
-            where('status', '==', status)
-        )
+        let q;
+        if (status === 'all') {
+            q = query(collection(db, BOOKS_COLLECTION))
+        } else {
+            q = query(
+                collection(db, BOOKS_COLLECTION),
+                where('status', '==', status)
+            )
+        }
         const querySnapshot = await getDocs(q)
 
         // Sorting dilakukan di sisi client (JavaScript)

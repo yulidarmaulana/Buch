@@ -26,7 +26,7 @@ const goHome = () => {
     <div>
       <button 
         @click="goHome" 
-        class="flex items-center text-xs font-medium text-gray-500 hover:text-gray-900 transition-colors mb-6"
+        class="flex items-center text-xs font-medium text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors mb-6"
       >
         <ArrowLeft class="w-4 h-4 mr-1" />
         Kembali ke Rak Buku
@@ -34,22 +34,22 @@ const goHome = () => {
 
       <!-- Branding / Logo -->
       <div class="text-center mt-8">
-        <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xs">
+        <div class="w-16 h-16 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-600 dark:text-indigo-400 rounded-3xl flex items-center justify-center mx-auto mb-4 shadow-xs">
           <ShieldCheck class="w-8 h-8" />
         </div>
-        <h1 class="text-xl font-bold text-gray-900 tracking-tight">Portal Khusus Admin</h1>
-        <p class="text-xs text-gray-500 mt-1 max-w-xs mx-auto">
+        <h1 class="text-xl font-bold text-gray-900 dark:text-gray-100 tracking-tight">Portal Khusus Admin</h1>
+        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1 max-w-xs mx-auto">
           Silakan masuk menggunakan akun Google Anda untuk mengelola koleksi buku dan ulasan.
         </p>
       </div>
     </div>
 
     <!-- Container Tombol Login -->
-    <div class="bg-white rounded-2xl p-5 border border-gray-100 shadow-sm space-y-3">
+    <div class="bg-white dark:bg-gray-900 rounded-2xl p-5 border border-gray-100 dark:border-gray-800 shadow-sm space-y-3">
       <button 
         @click="handleGoogleLogin"
         :disabled="authStore.isLoading"
-        class="w-full py-3 bg-gray-900 hover:bg-gray-800 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-2.5 transition-all active:scale-[0.98] disabled:opacity-50"
+        class="w-full py-3 bg-gray-900 dark:bg-gray-800 hover:bg-gray-800 dark:hover:bg-gray-700 text-white rounded-xl text-xs font-semibold flex items-center justify-center gap-2.5 transition-all active:scale-[0.98] disabled:opacity-50"
       >
         <Loader2 v-if="authStore.isLoading" class="w-4 h-4 animate-spin" />
         <template v-else>
@@ -64,7 +64,7 @@ const goHome = () => {
         </template>
       </button>
 
-      <p class="text-[10px] text-center text-gray-400 leading-normal">
+      <p class="text-[10px] text-center text-gray-400 dark:text-gray-500 leading-normal">
         Pengunjung umum tidak perlu login untuk melihat ulasan & daftar buku.
       </p>
     </div>
