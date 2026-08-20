@@ -21,14 +21,17 @@ import {
 } from 'firebase/auth'
 import type { Book, BookStatus } from '../types/book'
 
-// 1. Konfigurasi Firebase dari File Environment Variable (.env.local)
+// Helper untuk membersihkan tanda kutip (quotes) atau spasi yang tidak sengaja terbawa dari GitHub Secrets
+const cleanEnv = (val?: string) => (val || '').replace(/^["']|["']$/g, '').trim()
+
+// 1. Konfigurasi Firebase dari File Environment Variable (.env.local / GitHub Secrets)
 const firebaseConfig = {
-    apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-    authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_FIREBASE_APP_ID,
+    apiKey: cleanEnv(import.meta.env.VITE_FIREBASE_API_KEY),
+    authDomain: cleanEnv(import.meta.env.VITE_FIREBASE_AUTH_DOMAIN),
+    projectId: cleanEnv(import.meta.env.VITE_FIREBASE_PROJECT_ID),
+    storageBucket: cleanEnv(import.meta.env.VITE_FIREBASE_STORAGE_BUCKET),
+    messagingSenderId: cleanEnv(import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID),
+    appId: cleanEnv(import.meta.env.VITE_FIREBASE_APP_ID),
 }
 
 // Inisialisasi Firebase App, Firestore DB, dan Auth
