@@ -39,6 +39,7 @@ const form = ref<{
   googleBooksId: string
   title: string
   authors: string
+  genre: string
   coverUrl: string
   totalPages: number
   currentPage: number
@@ -51,6 +52,7 @@ const form = ref<{
   googleBooksId: '',
   title: '',
   authors: '',
+  genre: '',
   coverUrl: '',
   totalPages: 0,
   currentPage: 0,
@@ -77,6 +79,7 @@ const handleSelectGoogleBook = (selected: GoogleBookSearchResult) => {
   form.value.googleBooksId = selected.id
   form.value.title = selected.title
   form.value.authors = selected.authors.join(', ')
+  form.value.genre = selected.genre || ''
   form.value.coverUrl = selected.coverUrl
   form.value.totalPages = selected.totalPages || 0
 }
@@ -88,6 +91,7 @@ const resetForm = () => {
     googleBooksId: '',
     title: '',
     authors: '',
+    genre: '',
     coverUrl: '',
     totalPages: 0,
     currentPage: 0,
@@ -106,6 +110,7 @@ const startEdit = (book: Book) => {
     googleBooksId: book.googleBooksId || '',
     title: book.title,
     authors: book.authors.join(', '),
+    genre: book.genre || '',
     coverUrl: book.coverUrl || '',
     totalPages: book.totalPages || 0,
     currentPage: book.currentPage || 0,
@@ -136,6 +141,7 @@ const handleSubmit = async () => {
     googleBooksId: form.value.googleBooksId,
     title: form.value.title,
     authors: authorsArray,
+    genre: form.value.genre.trim(),
     coverUrl: form.value.coverUrl,
     totalPages: Number(form.value.totalPages) || 0,
     currentPage: Number(form.value.currentPage) || 0,
@@ -272,6 +278,17 @@ const goHome = () => {
           />
         </div>
 
+        <!-- Genre / Kategori -->
+        <div>
+          <label class="block font-medium text-gray-700 dark:text-gray-300 mb-1">Kategori / Genre</label>
+          <input 
+            v-model="form.genre" 
+            type="text" 
+            placeholder="Contoh: Self-Help, Fiction, dll."
+            class="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:bg-white dark:focus:bg-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          />
+        </div>
+
         <!-- URL Cover & Preview -->
         <div class="grid grid-cols-4 gap-2 items-center">
           <div class="col-span-3">
@@ -361,7 +378,7 @@ const goHome = () => {
         <button 
           type="submit" 
           :disabled="isSubmitting"
-          class="w-full py-3 bg-gray-900 dark:bg-indigo-600 hover:bg-gray-800 dark:hover:bg-indigo-500 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm active:scale-[0.98]"
+          class="w-full py-3 bg-orange-500 dark:bg-orange-600 hover:bg-orange-400 dark:hover:bg-orange-500 text-white font-semibold rounded-xl transition-all flex items-center justify-center gap-2 shadow-sm active:scale-[0.98]"
         >
           <Loader2 v-if="isSubmitting" class="w-4 h-4 animate-spin" />
           <template v-else>

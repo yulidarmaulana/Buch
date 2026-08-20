@@ -49,6 +49,7 @@ export const searchGoogleBooks = async (
                 authors: item.author_name || ['Penulis Tidak Diketahui'],
                 coverUrl: formatCoverUrl(item.cover_i),
                 totalPages: item.number_of_pages_median || 0,
+                genre: item.subject ? (Array.isArray(item.subject) ? item.subject[0] : item.subject) : '',
                 description: item.first_sentence ? (item.first_sentence[0] || item.first_sentence) : '',
                 publishedDate: item.first_publish_year ? item.first_publish_year.toString() : ''
             }

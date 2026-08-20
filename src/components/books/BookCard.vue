@@ -77,10 +77,19 @@ const goToDetail = () => {
           {{ book.title }}
         </h3>
 
-        <!-- Penulis -->
-        <p class="text-xs text-gray-500 dark:text-gray-400 truncate mt-0.5">
-          {{ book.authors.join(', ') || 'Penulis Tidak Diketahui' }}
-        </p>
+        <!-- Penulis & Genre -->
+        <div class="flex items-center gap-2 mt-0.5 overflow-hidden">
+          <p class="text-xs text-gray-500 dark:text-gray-400 truncate flex-1">
+            {{ book.authors.join(', ') || 'Penulis Tidak Diketahui' }}
+          </p>
+          <span 
+            v-if="book.genre" 
+            class="flex-shrink-0 px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 text-[9px] font-medium rounded-md truncate max-w-[80px]"
+            :title="book.genre"
+          >
+            {{ book.genre }}
+          </span>
+        </div>
 
         <!-- Rating Bintang (Jika ada) -->
         <div v-if="book.rating && book.rating > 0" class="flex items-center gap-1 mt-1.5">

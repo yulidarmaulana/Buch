@@ -11,6 +11,7 @@ export interface Book {
     totalPages: number;       // Total halaman buku
     currentPage: number;      // Halaman yang sedang/terakhir dibaca
     status: BookStatus;       // Status bacaan
+    genre?: string;           // Kategori atau Genre buku (opsional)
     rating?: number;          // Rating pribadi (1 - 5 bintang, opsional)
     review?: string;          // Catatan / Ulasan pribadi (opsional)
     startedAt?: string;       // Tanggal mulai membaca (Format ISO string: YYYY-MM-DD)
@@ -26,6 +27,7 @@ export interface GoogleBookSearchResult {
     authors: string[];
     coverUrl: string;
     totalPages: number;
+    genre?: string;
     description?: string;
     publishedDate?: string;
 }

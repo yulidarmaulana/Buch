@@ -137,11 +137,14 @@ const handleShare = async () => {
           <BookOpen v-else class="w-8 h-8 text-gray-500" />
         </div>
 
-        <div class="relative z-10 text-center max-w-xs">
+        <div class="relative z-10 text-center max-w-xs flex flex-col items-center">
           <h1 class="text-lg font-bold text-white leading-tight mb-1">{{ book.title }}</h1>
-          <p class="text-xs text-gray-300 font-medium">
+          <p class="text-xs text-gray-300 font-medium mb-2">
             {{ book.authors.length > 0 ? book.authors.join(', ') : 'Penulis Tidak Diketahui' }}
           </p>
+          <span v-if="book.genre" class="px-2 py-1 bg-white/20 backdrop-blur-md rounded-full text-[10px] font-semibold text-white/90 border border-white/10">
+            {{ book.genre }}
+          </span>
         </div>
       </div>
 
