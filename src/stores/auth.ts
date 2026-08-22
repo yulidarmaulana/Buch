@@ -10,13 +10,26 @@ export const useAuthStore = defineStore('auth', () => {
     // Status apakah admin sedang login
     const isAuthenticated = computed(() => user.value !== null)
 
+    // Daftar email yang diizinkan sebagai Admin
+    const ADMIN_EMAILS = [
+        'saputraivanmaulana@gmail.com'
+    ]
+
     // Inisialisasi Listener Firebase Auth
     const initAuth = (): Promise<User | null> => {
         return new Promise((resolve) => {
-            subscribeAuthState((currentUser) => {
-                user.value = currentUser
+            subscribeAuthState(async (currentUser) => {
+                if (currentUser && currentUser.email && ADMIN_EMAILS.includes(currentUser.email)) {
+                    user.value = currentUser
+                } else if (currentUser) {
+                    // Jika bukan admin, logout otomatis
+                    await logoutAdmin()
+                    user.value = null
+                } else {
+                    user.value = null
+                }
                 isLoading.value = false
-                resolve(currentUser)
+                resolve(user.value)
             })
         })
     }
@@ -25,9 +38,20 @@ export const useAuthStore = defineStore('auth', () => {
     const login = async (): Promise<boolean> => {
         isLoading.value = true
         const loggedInUser = await loginWithGoogle()
-        user.value = loggedInUser
+        
+        if (loggedInUser && loggedInUser.email && ADMIN_EMAILS.includes(loggedInUser.email)) {
+            user.value = loggedInUser
+            isLoading.value = false
+            return true
+        } else if (loggedInUser) {
+            await logoutAdmin()
+            user.value = null
+            isLoading.value = false
+            return false
+        }
+        
         isLoading.value = false
-        return loggedInUser !== null
+        return false
     }
 
     // Fungsi Logout

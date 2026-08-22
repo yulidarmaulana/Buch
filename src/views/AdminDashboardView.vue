@@ -23,8 +23,11 @@ import {
   ArrowLeft
 } from '@lucide/vue'
 
+import { useToast } from '../composables/useToast'
+
 const router = useRouter()
 const authStore = useAuthStore()
+const toast = useToast()
 
 // State UI & Form
 const isSearchModalOpen = ref(false)
@@ -126,7 +129,7 @@ const startEdit = (book: Book) => {
 // Submit Tambah / Edit Buku ke Firestore
 const handleSubmit = async () => {
   if (!form.value.title.trim()) {
-    alert('Judul buku tidak boleh kosong!')
+    toast.warning('Judul buku tidak boleh kosong!')
     return
   }
 
@@ -157,17 +160,21 @@ const handleSubmit = async () => {
     // Mode Update Data
     const success = await updateBook(editingBookId.value, payload)
     if (success) {
-      alert('Data buku berhasil diperbarui!')
+      toast.success('Data buku berhasil diperbarui!')
       resetForm()
       await loadBooks()
+    } else {
+      toast.error('Gagal memperbarui data buku.')
     }
   } else {
     // Mode Tambah Data Baru
     const newId = await addBook(payload)
     if (newId) {
-      alert('Buku baru berhasil ditambahkan ke rak!')
+      toast.success('Buku baru berhasil ditambahkan ke rak!')
       resetForm()
       await loadBooks()
+    } else {
+      toast.error('Gagal menambahkan buku ke rak.')
     }
   }
 
@@ -176,18 +183,40 @@ const handleSubmit = async () => {
 
 // Hapus Buku
 const handleDelete = async (id: string, title: string) => {
-  if (confirm(`Apakah Anda yakin ingin menghapus "${title}" dari database?`)) {
+  const confirmed = await toast.showConfirm({
+    title: 'Hapus Buku',
+    message: `Apakah Anda yakin ingin menghapus "${title}" dari database?`,
+    confirmText: 'Hapus',
+    cancelText: 'Batal',
+    isDanger: true
+  })
+
+  if (confirmed) {
     const success = await deleteBook(id)
     if (success) {
+      toast.success(`Buku "${title}" berhasil dihapus.`)
       await loadBooks()
+    } else {
+      toast.error('Gagal menghapus buku dari database.')
     }
   }
 }
 
 // Handler Logout Admin
 const handleLogout = async () => {
-  await authStore.logout()
-  router.push('/admin/login')
+  const confirmed = await toast.showConfirm({
+    title: 'Logout Admin',
+    message: 'Apakah Anda yakin ingin keluar dari sesi Admin?',
+    confirmText: 'Logout',
+    cancelText: 'Batal',
+    isDanger: true
+  })
+
+  if (confirmed) {
+    await authStore.logout()
+    toast.info('Berhasil keluar dari akun Admin.')
+    router.push('/admin/login')
+  }
 }
 
 const goHome = () => {

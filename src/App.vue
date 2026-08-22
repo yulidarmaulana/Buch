@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import BottomNav from './components/layout/BottomNav.vue'
+import ToastContainer from './components/ui/ToastContainer.vue'
+import ConfirmModal from './components/ui/ConfirmModal.vue'
 </script>
 
 <template>
@@ -11,5 +13,9 @@ import BottomNav from './components/layout/BottomNav.vue'
 
     <!-- Navigasi Bawah -->
     <BottomNav />
+
+    <!-- Notifikasi Toast & Modal Konfirmasi Global -->
+    <ToastContainer />
+    <ConfirmModal />
   </div>
 </template>

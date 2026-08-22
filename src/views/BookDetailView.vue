@@ -16,8 +16,11 @@ import {
 import { getBookById } from '../services/firebase'
 import type { Book } from '../types/book'
 
+import { useToast } from '../composables/useToast'
+
 const route = useRoute()
 const router = useRouter()
+const toast = useToast()
 
 const isLoading = ref(true)
 const book = ref<Book | null>(null)
@@ -67,9 +70,9 @@ const handleShare = async () => {
   } else {
     try {
       await navigator.clipboard.writeText(window.location.href)
-      alert('Tautan ulasan buku berhasil disalin!')
+      toast.success('Tautan ulasan buku berhasil disalin!')
     } catch {
-      alert('Gagal menyalin tautan.')
+      toast.error('Gagal menyalin tautan.')
     }
   }
 }

@@ -1,17 +1,20 @@
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import { useToast } from '../composables/useToast'
 import { ShieldCheck, Loader2, ArrowLeft } from '@lucide/vue'
 
 const router = useRouter()
 const authStore = useAuthStore()
+const toast = useToast()
 
 const handleGoogleLogin = async () => {
   const success = await authStore.login()
   if (success) {
+    toast.success('Berhasil login sebagai Admin!')
     router.push('/admin/dashboard')
   } else {
-    alert('Gagal melakukan login. Pastikan akun Google Anda terhubung.')
+    toast.error('Gagal melakukan login. Pastikan akun Google Anda terhubung.')
   }
 }
 
